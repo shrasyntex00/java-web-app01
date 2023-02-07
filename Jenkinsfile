@@ -7,7 +7,7 @@ pipeline {
     stages {
       stage('Git checkout') {    //Getting the source code from my github repo 'main' branch
            steps {
-               git branch: 'master', url: 'https://github.com/Jeevasanna/LTI-demo9.git'
+               git branch: 'master', url: 'https://github.com/Jeevasanna/hello-world-war.git'
            }
        }
 //        stage('OWASP-Dependency-Check') { 
