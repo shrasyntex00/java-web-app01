@@ -1,0 +1,33 @@
+---
+- hosts: tomcat
+  become: true
+  tasks:
+    - name: remove existing files
+      shell: rm -rf /tmp/java-web-app-1.0.0.war
+    - name: Install pip3
+      apt: 
+         name: python3-pip
+         state: present
+    - name: Install lxml
+      pip: 
+         name: lxml
+    - name: download war file
+      maven_artifact:
+        group_id: com.mt
+        artifact_id: maven-web-application
+        extension: war
+        version: 1.0.0
+        repository_url: http://43.204.22.243:8081/repository/test-release/
+        username: admin
+        password: admin123
+        dest: "/tmp/java-web-app-1.0.0.war"
+        mode: '0644'
+    - name: copy the war file
+      copy:
+        src: /tmp/java-web-app-1.0.0.war
+        dest: /opt/tomcat10/webapps/
+        remote_src: yes
+    - name: stop tomcat services
+      shell: /opt/tomcat10/bin/shutdown.sh
+    - name: start tomcat services
+      shell: nohup /opt/tomcat10/bin/startup.sh
