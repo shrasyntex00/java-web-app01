@@ -2,7 +2,7 @@ pipeline {
     agent any
     parameters {
         string defaultValue: '1.0.0', description: 'Enter Version of Artifact which you want to deploy', name: 'ART_VERSION'
-}
+    }
     tools {
         maven 'MAVEN'
     }
