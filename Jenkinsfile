@@ -121,7 +121,7 @@ pipeline {
 
          stage('deploy with ansible'){
             steps {
-                ansiblePlaybook credentialsId: 'ansiblecredentials', disableHostKeyChecking: true, installation: 'ansible', inventory: 'hosts.inv', playbook: 'deployjava.yaml'
+                ansiblePlaybook credentialsId: 'ansiblecredentials', disableHostKeyChecking: true, installation: 'ansible', inventory: 'hosts.inv', playbook: 'tomcat-deployment.yaml'
             }      
         }
 
