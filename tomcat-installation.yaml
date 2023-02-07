@@ -13,8 +13,8 @@
          name: lxml
     - name: download war file
       maven_artifact:
-        group_id: com.mt
-        artifact_id: maven-web-application
+        group_id: com.efsavage
+        artifact_id: hello-world-war
         extension: war
         version: 1.0.0
         repository_url: http://43.204.22.243:8081/repository/test-release/
