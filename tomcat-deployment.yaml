@@ -25,9 +25,9 @@
     - name: copy the war file
       copy:
         src: /tmp/hello-world-war-1.0.0.war
-        dest: /opt/tomcat10/webapps/
+        dest: /opt/apache-tomcat-9.0.71/webapps
         remote_src: yes
     - name: stop tomcat services
-      shell: /opt/tomcat10/bin/shutdown.sh
+      shell: /opt/apache-tomcat-9.0.71/bin/shutdown.sh
     - name: start tomcat services
-      shell: nohup /opt/tomcat10/bin/startup.sh
+      shell: nohup /opt/apache-tomcat-9.0.71/bin/startup.sh
