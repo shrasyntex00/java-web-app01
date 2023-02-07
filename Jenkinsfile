@@ -1,11 +1,13 @@
 pipeline {
     agent any
-    parameters {
-        string defaultValue: '1.0.0', description: 'Enter Version of Artifact which you want to deploy', name: 'ART_VERSION'
-    }
     tools {
         maven 'MAVEN'
     }
+    
+    parameters {
+        string defaultValue: '1.0.0', description: 'Enter Version of Artifact which you want to deploy', name: 'ART_VERSION'
+    }
+    
     // environment {
     //     AWS_ACCOUNT_ID= "803561623563"
     //     AWS_DEFAULT_REGION="ap-south-1"
