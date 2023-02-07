@@ -16,7 +16,7 @@
         group_id: com.efsavage
         artifact_id: hello-world-war
         extension: war
-        version: {{ version }}
+        version: "{{ version }}"
         repository_url: http://54.81.106.225:8081/repository/test-release/
         username: admin
         password: admin123
