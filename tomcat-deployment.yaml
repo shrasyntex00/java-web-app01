@@ -3,7 +3,7 @@
   become: true
   tasks:
     - name: remove existing files
-      shell: rm -rf /tmp/hello-world-war-{{ version }}.war
+      shell: rm -rf /tmp/hello-world-war-1.0.0.war
     - name: Install pip3
       apt: 
          name: python3-pip
@@ -20,11 +20,11 @@
         repository_url: http://54.81.106.225:8081/repository/test-release/
         username: admin
         password: admin123
-        dest: "/tmp/hello-world-war-{{ version }}.war"
+        dest: "/tmp/hello-world-war-1.0.0.war"
         mode: '0644'
     - name: copy the war file
       copy:
-        src: /tmp/hello-world-war-{{ version }}.war
+        src: /tmp/hello-world-war-1.0.0.war
         dest: /opt/apache-tomcat-9.0.71/webapps
         remote_src: yes
     - name: stop tomcat services
