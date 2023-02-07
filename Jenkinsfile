@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    parameters {
+        string defaultValue: '1.0.0', description: 'Enter Version of Artifact which you want to deploy', name: 'ART_VERSION'
+}
     tools {
         maven 'MAVEN'
     }
@@ -121,7 +124,7 @@ pipeline {
 
          stage('deploy with ansible'){
             steps {
-                ansiblePlaybook credentialsId: 'ansiblecredentials', disableHostKeyChecking: true, installation: 'ansible', inventory: 'hosts.inv', playbook: 'tomcat-deployment.yaml'
+                ansiblePlaybook credentialsId: 'ansiblecredentials',extras: "-e version=${ART_VERSION}", disableHostKeyChecking: true, installation: 'ansible', inventory: 'hosts.inv', playbook: 'tomcat-deployment.yaml'
             }      
         }
 
