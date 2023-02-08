@@ -1,0 +1,19 @@
+---
+# tasks file for tomcat
+
+- name: install pip3
+  apt: name=python3-pip state=present 
+  
+- name: Install lxml
+  pip: name=lxml
+
+- name: download tomcat server packages
+  get_url:
+    url: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.71/bin/apache-tomcat-9.0.71.tar.gz
+    dest: /usr/local
+
+- name: extract tomcat packages
+  unarchive:
+    src: /usr/local/apache-tomcat-9.0.71.tar.gz
+    dest: /usr/local
+    remote_src: yes
