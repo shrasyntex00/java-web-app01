@@ -163,16 +163,16 @@ pipeline {
         //     }
         // }
         
-        // stage('K8S Deploy'){
-        //     steps{
-        //         // kubernetesDeploy(
-        //         //   config: 'java-web-app-docker/javawebapp-deployment.yml',
-        //         //   kubeconfigId:'K8S',
-        //         //   enableConfigSubstitution: true
-        //         // )
+//         stage('K8S Deploy'){
+//             steps{
+//                 // kubernetesDeploy(
+//                 //   config: 'java-web-app-docker/javawebapp-deployment.yml',
+//                 //   kubeconfigId:'K8S',
+//                 //   enableConfigSubstitution: true
+//                 // )
                 
-        //       sh 'kubectl apply -f javawebapp-deployment.yml'
-        //     }
-        // }
+//               sh 'kubectl apply -f javawebapp-deployment.yml'
+//             }
+//         }
     }
 }
