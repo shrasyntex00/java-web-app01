@@ -1,2 +1,2 @@
-[tomcat]
+[apache]
 172.31.4.158 ansible_python_interpreter="/usr/bin/python3" ansible_user=ansible ansible_password=admin
