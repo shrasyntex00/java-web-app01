@@ -129,6 +129,12 @@ pipeline {
                 ansiblePlaybook credentialsId: 'ansiblecredentials',extras: "-e version=${ART_VERSION}", disableHostKeyChecking: true, installation: 'ansible', inventory: 'hosts.inv', playbook: 'tomcat-deployment.yaml'
             }      
         }
+        
+        stage('tomcat provision'){
+            steps{
+                ansiblePlaybook credentialsId: 'ansiblecredentials', disableHostKeyChecking: true, installation: 'ansible', inventory: 'dev.inv', playbook: 'demo.yml'
+            }
+        }
 
         
 
