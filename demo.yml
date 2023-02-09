@@ -1,5 +1,5 @@
 ---
-- hosts: tomcat
+- hosts: all
   become: True
   roles:
     - tomcat
