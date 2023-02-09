@@ -17,6 +17,17 @@
     src: /usr/local/apache-tomcat-9.0.71.tar.gz
     dest: /usr/local
     remote_src: yes
+   
+- name: Changing the Tomcat File Ownership, Group and Permissions
+      file:
+        path: /usr/local/apache-tomcat-9.0.71
+        recurse: yes
+        state: directory
+        
+- name: 8) Create the tomcat.service file
+      file:
+        path: /etc/systemd/system/tomcat.service
+        state: touch
     
 - name: changing tomcat port number
   template:
