@@ -20,7 +20,7 @@
     
 - name: changing tomcat port number
   template:
-    src: /var/lib/jenkins/workspace/AnsibleDemo/server.xml.j2
+    src: /var/lib/jenkins/workspace/demoapplication/server.xml.j2
     dest: /usr/local/apache-tomcat-9.0.71/conf/server.xml
     mode: '0777'
     
