@@ -39,29 +39,29 @@
 #         owner: tomcat
 #         group: tomcat
 #         state: link
-#     - name: 9) Create the tomcat.service file
-#       file:
-#         path: /etc/systemd/system/tomcat.service
-#         state: touch
-#     - name: 10) Edit the tomcat.service
-#       blockinfile:
-#         dest: /etc/systemd/system/tomcat.service
-#         insertafter: null
-#         block: >
-#           [Unit]
-#           Description = Apache Tomcat 9
-#           After = syslog.target network.target
-#           [Service]
-#           User = tomcat
-#           Group = tomcat
-#           Type = oneshot
-#           PIDFile =/usr/local/apache-tomcat-9.0.71/tomcat.pid
-#           RemainAfterExit = yes
-#           ExecStart =/usr/local/apache-tomcat-9.0.71/bin/startup.sh
-#           ExecStop =/usr/local/apache-tomcat-9.0.71/bin/shutdown.sh
-#           ExecReStart =/usr/local/apache-tomcat-9.0.71/bin/shutdown.sh;/usr/local/apache-tomcat-9.0.71/bin/startup.sh
-#           [Install]
-#           WantedBy = multi-user.target
+    - name: 9) Create the tomcat.service file
+      file:
+        path: /etc/systemd/system/tomcat.service
+        state: touch
+    - name: 10) Edit the tomcat.service
+      blockinfile:
+        dest: /etc/systemd/system/tomcat.service
+        insertafter: null
+        block: >
+          [Unit]
+          Description = Apache Tomcat 9
+          After = syslog.target network.target
+          [Service]
+          User = tomcat
+          Group = tomcat
+          Type = oneshot
+          PIDFile =/usr/local/apache-tomcat-9.0.71/tomcat.pid
+          RemainAfterExit = yes
+          ExecStart =/usr/local/apache-tomcat-9.0.71/bin/startup.sh
+          ExecStop =/usr/local/apache-tomcat-9.0.71/bin/shutdown.sh
+          ExecReStart =/usr/local/apache-tomcat-9.0.71/bin/shutdown.sh;/usr/local/apache-tomcat-9.0.71/bin/startup.sh
+          [Install]
+          WantedBy = multi-user.target
     - name: 11) chmod 755 tomcat.service
       file:
         path: /etc/systemd/system/tomcat.service
