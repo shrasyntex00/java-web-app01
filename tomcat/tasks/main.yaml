@@ -1,21 +1,89 @@
 ---
 # tasks file for tomcat
 
-- name: Install pip3
+  tasks:
+    - name: 1) Install Java
+      apt:
+        name: openjdk-11-jdk
+        state: present
+    - name: 2) Add the User Tomcat
+      user:
+        name: tomcat
+        shell: /sbin/nologin
+    - name: 3) Install pip3
       apt: 
          name: python3-pip
          state: present
-  
-- name: Install lxml
-  pip: name=lxml
+    - name: 4) Get Installer
+      get_url:
+        url: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.71/bin/apache-tomcat-9.0.71.tar.gz
+        dest: /tmp/
+    - name: 5) copy the file from TMP dir
+      copy:
+        src: /tmp/apache-tomcat-9.0.71.tar.gz
+        dest: /usr/local/
+        remote_src: yes
+    - name: 6) Install the Tomcat
+      unarchive:
+        src: /usr/local/apache-tomcat-9.0.71.tar.gz
+        dest: /usr/local/
+        remote_src: yes
+    - name: 7) Changing the Tomcat File Ownership, Group and Permissions
+      file:
+        path: /usr/local/apache-tomcat-9.0.71
+        recurse: yes
+        state: directory
+    - name: 8) Make the Tomcat file symbollic
+      file:
+        src: /usr/local/apache-tomcat-9.0.71
+        dest: /usr/local/tomcat9
+        owner: tomcat
+        group: tomcat
+        state: link
+    - name: 9) Create the tomcat.service file
+      file:
+        path: /etc/systemd/system/tomcat.service
+        state: touch
+    - name: 10) Edit the tomcat.service
+      blockinfile:
+        dest: /etc/systemd/system/tomcat.service
+        insertafter: null
+        block: >
+          [Unit]
+          Description = Apache Tomcat 9
+          After = syslog.target network.target
+          [Service]
+          User = tomcat
+          Group = tomcat
+          Type = oneshot
+          PIDFile =/usr/local/apache-tomcat-9.0.71/tomcat.pid
+          RemainAfterExit = yes
+          ExecStart =/usr/local/apache-tomcat-9.0.71/bin/startup.sh
+          ExecStop =/usr/local/apache-tomcat-9.0.71/bin/shutdown.sh
+          ExecReStart =/usr/local/apache-tomcat-9.0.71/bin/shutdown.sh;/usr/local/apache-tomcat-9.0.71/bin/startup.sh
+          [Install]
+          WantedBy = multi-user.target
+    - name: 11) chmod 755 tomcat.service
+      file:
+        path: /etc/systemd/system/tomcat.service
+        mode: 777
+    - name: 12) Start the Tomcat
+      systemd:
+        name: tomcat.service
+        state: started
+        daemon_reload: yes
+        enabled: yes
+         
+# - name: Install lxml
+#   pip: name=lxml
 
-- name: download tomcat server packages
-  get_url:
-    url: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.71/bin/apache-tomcat-9.0.71.tar.gz
-    dest: /usr/local
+# - name: download tomcat server packages
+#   get_url:
+#     url: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.71/bin/apache-tomcat-9.0.71.tar.gz
+#     dest: /usr/local
 
-- name: extract tomcat packages
-  unarchive:
-    src: /usr/local/apache-tomcat-9.0.71.tar.gz
-    dest: /usr/local
-    remote_src: yes
+# - name: extract tomcat packages
+#   unarchive:
+#     src: /usr/local/apache-tomcat-9.0.71.tar.gz
+#     dest: /usr/local
+#     remote_src: yes
