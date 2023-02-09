@@ -42,11 +42,11 @@ pipeline {
 //             }
 //         }
       
-//         stage('Build') {
-//             steps {
-//                 sh 'mvn clean package'
-//             }
-//         }
+        stage('Build') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
       
 //         stage('Upload war to Nexus'){
 //             steps {
@@ -87,11 +87,11 @@ pipeline {
 //             }
 //         }
         
-//         stage('push nexus artifact'){
-//             steps {
-//                 sh 'mvn clean deploy'
-//             }
-//         }
+        stage('push nexus artifact'){
+            steps {
+                sh 'mvn clean deploy'
+            }
+        }
 
         // stage('deploy to tomcat') {
         //     steps {
@@ -124,11 +124,11 @@ pipeline {
 //             }
 //         }
 
-         stage('provision & deploy with ansible'){
-            steps {
-                ansiblePlaybook credentialsId: 'ansiblecredentials',extras: "-e version=${ART_VERSION}", disableHostKeyChecking: true, installation: 'ansible', inventory: 'hosts.inv', playbook: 'demo.yml'
-            }      
-        }
+//          stage('provision & deploy with ansible'){
+//             steps {
+//                 ansiblePlaybook credentialsId: 'ansiblecredentials',extras: "-e version=${ART_VERSION}", disableHostKeyChecking: true, installation: 'ansible', inventory: 'hosts.inv', playbook: 'demo.yml'
+//             }      
+//         }
         
 //         stage('tomcat provision'){
 //             steps{
