@@ -7,18 +7,6 @@
 - name: remove war file from temp folder
   shell: rm -rf /tmp/demo-app-1.0.0.war
          
-- name: download war file
-  maven_artifact:
-    group_id: com.efsavage
-    artifact_id: demo-app
-    extension: war
-    version: "{{ version }}"
-    repository_url: http://52.91.50.50:8081/repository/test-release/
-    username: admin
-    password: admin123
-    dest: "/tmp/demo-app-{{ version }}.war"
-    mode: '0644'
-
 - name: download tomcat server packages
   get_url:
     url: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.71/bin/apache-tomcat-9.0.71.tar.gz
@@ -29,17 +17,29 @@
     src: /usr/local/apache-tomcat-9.0.71.tar.gz
     dest: /usr/local
     remote_src: yes
-
-- name: copy the war file
-  copy:
-    src: /tmp/demo-app-{{ version }}.war
-    dest: /opt/apache-tomcat-9.0.71/webapps
-
+    
 - name: changing tomcat port number
   template:
     src: /var/lib/jenkins/workspace/AnsibleDemo/server.xml.j2
     dest: /usr/local/apache-tomcat-9.0.71/conf/server.xml
     mode: '0777'
+    
+# - name: download war file
+#   maven_artifact:
+#     group_id: com.efsavage
+#     artifact_id: demo-app
+#     extension: war
+#     version: "{{ version }}"
+#     repository_url: http://52.91.50.50:8081/repository/test-release/
+#     username: admin
+#     password: admin123
+#     dest: "/tmp/demo-app-{{ version }}.war"
+#     mode: '0644'
+
+# - name: copy the war file
+#   copy:
+#     src: /tmp/demo-app-{{ version }}.war
+#     dest: /opt/apache-tomcat-9.0.71/webapps
     
 # - name: Install Apache
 #       apt: name=apache2 update_cache=yes state=latest
