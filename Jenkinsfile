@@ -126,7 +126,7 @@ pipeline {
 
          stage('provision & deploy with ansible'){
             steps {
-                ansiblePlaybook credentialsId: 'ansiblecredentials',extras: "-e version=${ART_VERSION}", disableHostKeyChecking: true, installation: 'ansible', inventory: 'hosts.inv', playbook: 'demo.yml'
+                ansiblePlaybook credentialsId: 'ansiblecredentials',extras: "-e version=${ART_VERSION}", disableHostKeyChecking: true, installation: 'ansible', inventory: 'dev.inv', playbook: 'demo.yml'
             }      
         }
 
