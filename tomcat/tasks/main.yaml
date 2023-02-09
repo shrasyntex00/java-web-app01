@@ -74,8 +74,8 @@
 #         enabled: yes
  
 
-- name: install pip3
-  apt: name=python-pip3 state=present 
+# - name: install pip3
+#   apt: name=python-pip3 state=present 
   
 - name: Install lxml
   pip: name=lxml
