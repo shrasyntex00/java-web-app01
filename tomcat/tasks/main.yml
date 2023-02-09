@@ -5,18 +5,18 @@
   pip: name=lxml
 
 - name: remove war file from temp folder
-  shell: rm -rf /tmp/hello-world-war-1.0.0.war
+  shell: rm -rf /tmp/demo-app-1.0.0.war
          
 - name: download war file
   maven_artifact:
     group_id: com.efsavage
-    artifact_id: hello-world-war
+    artifact_id: demo-app
     extension: war
     version: "{{ version }}"
-    repository_url: http://54.81.106.225:8081/repository/test-release/
+    repository_url: http://52.91.50.50:8081/repository/test-release/
     username: admin
     password: admin123
-    dest: "/tmp/hello-world-war-{{ version }}.war"
+    dest: "/tmp/demo-app-{{ version }}.war"
     mode: '0644'
 
 - name: download tomcat server packages
@@ -32,7 +32,7 @@
 
 - name: copy the war file
   copy:
-    src: /tmp/hello-world-war-{{ version }}.war
+    src: /tmp/demo-app-{{ version }}.war
     dest: /opt/apache-tomcat-9.0.71/webapps
 
 - name: changing tomcat port number
