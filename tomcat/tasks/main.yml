@@ -41,8 +41,8 @@
     dest: /usr/local/apache-tomcat-9.0.71/conf/server.xml
     mode: '0777'
     
-- name: Install Apache
-      apt: name=apache2 update_cache=yes state=latest
+# - name: Install Apache
+#       apt: name=apache2 update_cache=yes state=latest
     
   notify: restart tomcat
   
