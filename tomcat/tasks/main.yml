@@ -8,16 +8,16 @@
   shell: rm -rf /tmp/hello-world-war-1.0.0.war
          
 - name: download war file
-      maven_artifact:
-        group_id: com.efsavage
-        artifact_id: hello-world-war
-        extension: war
-        version: "{{ version }}"
-        repository_url: http://54.81.106.225:8081/repository/test-release/
-        username: admin
-        password: admin123
-        dest: "/tmp/hello-world-war-{{ version }}.war"
-        mode: '0644'
+  maven_artifact:
+    group_id: com.efsavage
+    artifact_id: hello-world-war
+    extension: war
+    version: "{{ version }}"
+    repository_url: http://54.81.106.225:8081/repository/test-release/
+    username: admin
+    password: admin123
+    dest: "/tmp/hello-world-war-{{ version }}.war"
+    mode: '0644'
 
 - name: download tomcat server packages
   get_url:
