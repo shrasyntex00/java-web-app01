@@ -1,7 +1,6 @@
 ---
 # tasks file for tomcat
 
-  tasks:
     - name: 1) Install Java
       apt:
         name: openjdk-11-jdk
