@@ -35,7 +35,7 @@
     insertafter: null
     block: >
     [Unit]
-    Description = Apache Tomcat 9
+    Description = Tomcat9
     After = syslog.target network.target
     [Service]
     User = tomcat
